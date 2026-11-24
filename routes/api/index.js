@@ -2,7 +2,7 @@ import express from "express";
 import userRoutes from "./userRoutes.js";
 import noteRoutes from "./noteRoutes.js";
 
-const router = require("express").Router();
+const router = express.Router();
 
 router.use("/users", userRoutes);
 router.use("/notes", noteRoutes);

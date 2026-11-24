@@ -4,16 +4,35 @@ import { signToken } from "../../utils/auth.js";
 
 const router = express.Router();
 
-
 // Register
 router.post("/register", async (req, res) => {
   try {
-    const user = await User.create(req.body);
+    const { username, email, password } = req.body;
+
+    if (!username || !email || !password) {
+      return res.status(400).json({
+        message: "Please provide username, email, and password.",
+      });
+    }
+
+    const user = await User.create({
+      username,
+      email,
+      password,
+    });
+
     const token = signToken(user);
 
-    res.status(201).json({ token, user });
+    res.status(201).json({
+      token,
+      user,
+    });
   } catch (err) {
-    res.status(400).json(err);
+    console.error("Registration error:", err.message);
+
+    res.status(400).json({
+      message: err.message,
+    });
   }
 });
 

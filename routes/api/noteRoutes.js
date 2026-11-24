@@ -1,9 +1,9 @@
 import express from 'express'
 import Note from "../../models/Note.js";
+import { authMiddleware } from "../../utils/auth.js";
 
 const router = express.Router();
 
-const { authMiddleware } = require("../../utils/auth");
 
 // Protect all note routes
 router.use(authMiddleware);
@@ -107,5 +107,4 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-module.exports = router;
 export default router;
