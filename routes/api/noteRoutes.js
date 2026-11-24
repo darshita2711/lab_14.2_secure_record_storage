@@ -1,5 +1,8 @@
-const router = require("express").Router();
-const { Note } = require("../../models");
+import express from 'express'
+import Note from "../../models/Note.js";
+
+const router = express.Router();
+
 const { authMiddleware } = require("../../utils/auth");
 
 // Protect all note routes

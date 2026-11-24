@@ -1,15 +1,15 @@
-const jwt = require("jsonwebtoken");
+import jwt from "jsonwebtoken";
 
 const secret = process.env.JWT_SECRET;
 const expiration = "2h";
 
-module.exports = {
-  authMiddleware: function (req, res, next) {
+export function authMiddleware(req, res, next) {
     let token =
       req.body.token ||
       req.query.token ||
       req.headers.authorization;
 
+      // Remove "Bearer " from the authorization header
     if (req.headers.authorization) {
       token = token.split(" ").pop().trim();
     }
@@ -33,9 +33,9 @@ module.exports = {
     }
 
     next();
-  },
+  }
 
-  signToken: function ({ username, email, _id }) {
+export function  signToken ({ username, email, _id }) {
     const payload = { username, email, _id };
 
     return jwt.sign(
@@ -43,5 +43,4 @@ module.exports = {
       secret,
       { expiresIn: expiration }
     );
-  },
-};
+  }

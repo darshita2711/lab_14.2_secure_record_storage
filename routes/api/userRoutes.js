@@ -2,7 +2,7 @@ import express from "express";
 import User from "../../models/User.js";
 import { signToken } from "../../utils/auth.js";
 
-const router = require("express").Router();
+const router = express.Router();
 
 
 // Register
